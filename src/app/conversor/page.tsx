@@ -239,9 +239,11 @@ export default function ConversorPage() {
       // Vamos processar como download de arquivo
       const blob = await response.blob();
       
-      // Obter nome do arquivo do header Content-Disposition ou usar padrão
+      // Obter nome do arquivo do header Content-Disposition ou usar padrão CI240_001
       const contentDisposition = response.headers.get('Content-Disposition');
-      let filename = 'CNAB240_arquivo.rem';
+      const timestamp = Date.now().toString();
+      const numeroSequencialArquivo7Digitos = timestamp.slice(-7).padStart(7, '0');
+      let filename = `CI240_001_${numeroSequencialArquivo7Digitos}.REM`;
       if (contentDisposition) {
         const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
         if (filenameMatch) {
